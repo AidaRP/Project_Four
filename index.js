@@ -2,6 +2,7 @@ const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const router = require('./router.js');
 
 const app = express();
 const PORT = 2000;
