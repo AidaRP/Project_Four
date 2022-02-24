@@ -104,5 +104,25 @@ const UserController = {
      });
     },
     
-}
+    async logout(req, res) {
+        try {
+            await Token.destroy({
+                where: {
+                    [Op.and]: [
+                        { UserId: req.user.id },
+                        { token: req.headers.authorization },
+                    ],
+                },
+            });
+            res.send({ message: "Succesful disconnection"});
+        } catch (error) {
+            console.log(error);
+            res
+            .status(500)
+            .send({ message: "had a problem in disconnection process"});
+        
+    }
+  },
+};
 
+module.exports = UserController;
