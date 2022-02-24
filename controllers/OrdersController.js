@@ -8,7 +8,7 @@ let userModel = require('../models').user;
 
 const OrderController = {
     getAll = (req,res) => {
-    Order.findAll({
+    order.findAll({
         include:[order],
     })
     .then((orders) => 
@@ -26,7 +26,7 @@ const OrderController = {
 
     async delete(req, res){
         try {
-            await Order.destroy({
+            await order.destroy({
                 where: {
                     id: req.params.id,
                 },
@@ -36,14 +36,30 @@ const OrderController = {
             console.error(error);
             res
             .status(500)
-            .send({ message: "AA unknow error  have been execute for destroy the orders "})
+            .send({ message: "A unknow error  have been execute for destroy the orders "})
         }
     },
 
-    
+    async update(req,res){
+        try {
+            await order.update({
+                where: {
+                    id: req.params.id,
+                },
+            });
+            res.send("The Orders has been updated succesfully")
+        } catch (error) {
+            console.error(error);
+            res
+            .status(500)
+            .send({ message: "A unknow error have been execute for updating the orders" })
+        }
+    }
 
 
 
 
 
 }
+
+module.exports = OrderController;

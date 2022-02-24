@@ -59,7 +59,7 @@ const UserController = {
             console.error(error);
             res
             .status(500)
-            .send({ message: "A error unknow have been execute for destroy the user"})
+            .send({ message: "A unknow error  have been execute for destroy the user"})
         }
     },
 
