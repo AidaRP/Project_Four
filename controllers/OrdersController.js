@@ -1,6 +1,5 @@
-const { order } = require('../models/index');
-const { film  } = require('../models/index');
-const { user  } = require('../models/index');
+const { order, film, user } = require('../models/index.js');
+
 
 
 let filmModel = require('../models').film;
