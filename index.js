@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const router = require('./router.js');
+const db = require('./db.js');
+
 
 const app = express();
 const PORT = 2000;
@@ -24,3 +26,8 @@ app.use(cors(corsOptions)); //Add CORS Middleware
 //Routes
 app.get('/',(req, res) => {res.send('Welcome to the DevHell');});
 app.use(router);
+
+db.then(()=>{
+    app.listen(PORT, ()=> console.log(`Server on port ${PORT}`.bgBlue.white)); //ARRANCO SERVIDOR
+})
+.catch((err)=> console.log(err.message));   

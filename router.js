@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const auth = require('./middlewares/auth');
+// const auth = require('./middlewares/auth');
 
 const FilmsRouter = require('./views/FilmsRouter');
 const OrdersRouter = require('./views/OrdersRouter');
