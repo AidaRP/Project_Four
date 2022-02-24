@@ -81,7 +81,28 @@ const UserController = {
             .send({ message: "Havent possible update the User" });
         }
     },
- 
-
+ login(req, res) {
+     User.findOne({
+         where: {
+             email: req.body.email,
+         },
+     }).then((user) => {
+         if (!user) {
+             return res
+             .status(400)
+             .send({ message: "Incorrect User or Pass"});
+         }
+         const isMatch = bcrypt.compareSync(req.body.password, user.password);
+         if(!isMatch) {
+             return res
+             .status(400)
+             .send({ message: "Incorrect User or Pass"})
+         }
+         token = jwt.sign({ id: user.id }, jwt_secret);
+         Token.create({ token, UserId: user.id});
+         res.send({ message: "Welcome!" + user.name, user, token});
+     });
+    },
+    
 }
 
