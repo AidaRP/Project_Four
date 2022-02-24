@@ -24,6 +24,24 @@ const UserController = {
         });
         
     },
-    
+
+    getAll(req, res){
+        User.findAll({
+            include:[Post],
+        })
+        .then((users) =>
+        res.status(200)
+        .send({ description: "All users welcome with success "})
+        )
+        .catch((err) => {
+            console.error(err);
+            res.status(500)
+            .send({ message: "The users haven't been loading "})
+
+        });
+        
+    },
+
+
 }
 
