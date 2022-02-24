@@ -54,7 +54,7 @@ const UserController = {
                     UserId: req.params.id,
                 },
             });
-            res.send("The user has been destroy with success");
+            res.send("The user has been destroy with succesfully");
         } catch (error) {
             console.error(error);
             res

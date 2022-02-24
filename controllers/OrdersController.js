@@ -24,6 +24,22 @@ const OrderController = {
 
     },
 
+    async delete(req, res){
+        try {
+            await Order.destroy({
+                where: {
+                    id: req.params.id,
+                },
+            });
+            res.send("The Orders has been destroyed succesfully")
+        } catch (error) {
+            console.error(error);
+            res
+            .status(500)
+            .send({ message: "AA unknow error  have been execute for destroy the orders "})
+        }
+    },
+
     
 
 
