@@ -28,6 +28,7 @@ app.get('/',(req, res) => {res.send('Welcome to the DevHell');});
 app.use(router);
 
 db.then(()=>{
-    app.listen(PORT, ()=> console.log(`Server on port ${PORT}`.bgBlue.white)); //ARRANCO SERVIDOR
+    app.listen(PORT, ()=> 
+    console.log(`Flow to ${PORT}, yo vestida flow to ${PORT}`)); //Mensaje para saber que el server está en funcionamiento.
 })
 .catch((err)=> console.log(err.message));   
