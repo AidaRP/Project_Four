@@ -1,5 +1,5 @@
 
-const { User, Post, Token, Sequelize} = require("../models/index.js");
+const { user, Token, Sequelize} = require("../models/index.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret} = require("../config/config.json")["development"];
@@ -27,7 +27,7 @@ const UserController = {
 
     getAll(req, res){
         User.findAll({
-            include:[Post],
+            include:[order],
         })
         .then((users) =>
         res.status(200)
@@ -98,7 +98,7 @@ const UserController = {
              .status(400)
              .send({ message: "Incorrect User or Pass"})
          }
-         token = jwt.sign({ id: user.id }, jwt_secret);
+         Token = jwt.sign({ id: user.id }, jwt_secret);
          Token.create({ token, UserId: user.id});
          res.send({ message: "Welcome!" + user.name, user, token});
      });
