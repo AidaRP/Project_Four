@@ -42,6 +42,46 @@ const UserController = {
         
     },
 
+    async delete(req, res) {
+        try {
+            await User.destroy({
+                where: {
+                    id: req.params.id,
+                },
+            });
+            await Post.destroy({
+                where: {
+                    UserId: req.params.id,
+                },
+            });
+            res.send("The user has been destroy with success");
+        } catch (error) {
+            console.error(error);
+            res
+            .status(500)
+            .send({ message: "A error unknow have been execute for destroy the user"})
+        }
+    },
+
+    async update(req, res){
+        try {
+            await User.update(
+                { ...req.body },
+                {
+                    where: {
+                        id: req.params.id,
+                    },
+                }
+            );
+            res.send("The User has been update with success");
+        }catch (error){
+            console.error(error);
+            res
+            .status(500)
+            .send({ message: "Havent possible update the User" });
+        }
+    },
+ 
 
 }
 
