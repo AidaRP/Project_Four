@@ -14,7 +14,7 @@ const UserController = {
         }
         req.body.rol = "user";
         const hash = bcrypt.hashSync(req.body.password, 10);
-        User.create({...req.body, password:hash })
+        user.create({...req.body, password:hash })
         .then((user) =>
         res.status(201).send({ message: "Usuario creado con éxito", user})
         )
@@ -26,7 +26,7 @@ const UserController = {
     },
 
     getAll(req, res){
-        User.findAll({
+        user.findAll({
             include:[order],
         })
         .then((users) =>
@@ -44,7 +44,7 @@ const UserController = {
 
     async delete(req, res) {
         try {
-            await User.destroy({
+            await user.destroy({
                 where: {
                     id: req.params.id,
                 },
@@ -82,7 +82,7 @@ const UserController = {
         }
     },
  login(req, res) {
-     User.findOne({
+     user.findOne({
          where: {
              email: req.body.email,
          },

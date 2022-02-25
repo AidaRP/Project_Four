@@ -21,7 +21,7 @@ let corsOptions = {
 
 //Middleware
 app.use(express.json());
-app.use(cors(corsOptions)); //Add CORS Middleware
+app.use(cors(corsOptions)); //Add CORS Middleware.
 
 //Routes
 app.get('/',(req, res) => {res.send('Welcome to the DevHell');});
@@ -29,6 +29,6 @@ app.use(router);
 
 db.then(()=>{
     app.listen(PORT, ()=> 
-    console.log(`Flow to ${PORT}, yo vestida flow to ${PORT}`)); //Mensaje para saber que el server está en funcionamiento.
+    console.log(`Flow to ${PORT}, yo vestida flow to ${PORT}`)); //Message for know that server are in functioning.
 })
 .catch((err)=> console.log(err.message));   

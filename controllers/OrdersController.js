@@ -1,17 +1,19 @@
+
+//Constants and variables
 const { order, film, user } = require('../models/index.js');
-
-
 
 let filmModel = require('../models').film;
 
 let userModel = require('../models').user;
+
+
 
 const OrderController = {
     getAll = (req,res) => {
     order.findAll({
         include:[order],
     })
-    .then((orders) => 
+    .then((order) => 
     res.status(200)
     .send({ description: "¡All orders have been get succesfully!🥳 "})
     )

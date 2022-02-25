@@ -1,6 +1,16 @@
 # -------- PROYECTO NÚMERO 4️⃣: --------  
 
 
+# TECNOLOGÍAS:
+
+
+
+
+
+
+
+
+# RESUMEN:
 
 
 Primeramente instalamos las dependencias 
@@ -31,3 +41,5 @@ Terceramente creamos la carpeta views donde irán las vistas (endpoints) de nues
 
 
 creamos el archivo db.js para que podamos establecer la conexión con la BBDD. 
+
+ # ENDPOINTS UTILIZADOS: ![EndPoints](/img_ReadMe/EndPoints_SS.jpg);
