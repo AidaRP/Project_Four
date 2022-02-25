@@ -9,11 +9,11 @@ const FilmsController = require('../controllers/FilmsController');
 
 //Read all films
 router.get('/',FilmsController.getFilms);
-//http://localhost:3000/peliculas
+//http://localhost:2000/films
 
 //Register a new film
 router.post('/', FilmsController.filmRegister);
-//http://localhost:3000/peliculas
+//http://localhost:2000/films
 
 //Search films for favorite category
 router.get('/favorite', FilmsController.favouriteFilms);
@@ -22,7 +22,7 @@ router.get('/favorite', FilmsController.favouriteFilms);
 router.get('/adults', FilmsController.adultFilms);
 
 //Search films for her title
-router.get('/title', FilmsController.titleFilms);
+// router.get('/title', FilmsController.titleFilms);
 
 //Seacrh a News Films
 router.get('/news', FilmsController.traeNovedades);

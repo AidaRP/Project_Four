@@ -5,28 +5,29 @@ const { Op } = require("sequelize");
 const { compareSync } = require("bcrypt");
 
 
-const FilmsController = {
 
 
 //Controller Film Funtions
 
-getFilms = (req, res) => {
+const FilmsController = {};
+
+FilmsController.getFilms = (req, res) => {
 
 },
 
-filmRegister = (req, res) => {
+FilmsController.filmRegister = (req, res) => {
 
 },
 
-titleFilms = async (req, res) => {
+FilmsController.titleFilms = async (req, res) => {
 
-    let busqueda = req.query.criterio;
+    let busqueda = req.query.title;
 
     try {
 
-        let resultados;
+        let results;
 
-        res.send(resultados.data);
+        res.send(results.data);
         
 
     } catch (error) {
@@ -35,7 +36,7 @@ titleFilms = async (req, res) => {
 
 },
 
-getNews = async (req, res) => {
+FilmsController.getNews = async (req, res) => {
 
     try {
 
@@ -48,10 +49,10 @@ getNews = async (req, res) => {
     }
 },
 
-favouriteFilms = (req,res) => {
+FilmsController.favouriteFilms = (req,res) => {
 
 
-    let titulo = req.query.titulo;
+    let title = req.query.title;
     let adult = req.query.adult;
     let popularity = req.query.popularity;
 
@@ -60,8 +61,8 @@ favouriteFilms = (req,res) => {
 
             [Op.and] : [
                 {
-                    titulo : {
-                        [Op.like] : titulo
+                    title : {
+                        [Op.like] : title
                     }
                 },
                 {
@@ -90,12 +91,12 @@ favouriteFilms = (req,res) => {
     })
 },
 
-adultFilms = (req,res) => {
+FilmsController.adultFilms = (req,res) => {
 
     
     //All films that don't be for childrens
 
-    findAll({
+    FilmsController.findAll({
         where : {
             [Op.not] : [
                 {
@@ -116,7 +117,7 @@ adultFilms = (req,res) => {
     })
 
    }
-};
+
 
 
 module.exports = FilmsController;
