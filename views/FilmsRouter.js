@@ -22,9 +22,9 @@ router.get('/favorite', FilmsController.favouriteFilms);
 router.get('/adults', FilmsController.adultFilms);
 
 //Search films for her title
-// router.get('/title', FilmsController.titleFilms);
+router.get('/title', FilmsController.titleFilms);
 
 //Seacrh a News Films
-router.get('/news', FilmsController.traeNovedades);
+router.get('/news', FilmsController.getNews);
 
 module.exports = router;

@@ -1,67 +1,46 @@
 
-//Constants and variables
-const { order, film, user } = require('../models/index.js');
-
-let filmModel = require('../models').film;
-
-let userModel = require('../models').user;
+const { Order } = require('../models/index');
 
 
+const OrdersController = {};
 
-const OrderController = {
-    getAll = (req,res) => {
-    order.findAll({
-        include:[order],
+OrdersController.placeNewOrder = (req,res) => {
+    
+    let body = req.body;
+
+    console.log("This is fucking body",body)
+
+    Order.create({
+        price: body.price,
+        peliculaId: body.filmId,
+        usuarioId: body.userId,
+        fecha: body.date
     })
-    .then((order) => 
-    res.status(200)
-    .send({ description: "¡All orders have been get succesfully!🥳 "})
-    )
-    .catch((err) => {
-        console.error(err);
-        res.status(500)
-        .send({ message: "The orders haven't been loading"})
-    });
-
-
-    },
-
-    async delete(req, res){
-        try {
-            await order.destroy({
-                where: {
-                    id: req.params.id,
-                },
-            });
-            res.send("The Orders has been destroyed succesfully")
-        } catch (error) {
-            console.error(error);
-            res
-            .status(500)
-            .send({ message: "A unknow error  have been execute for destroy the orders "})
+    .then(Order => {
+        if(Order){
+            res.send(Order)
+        }else{
+            res.send("The creation of a new order has been failed");
         }
-    },
-
-    async update(req,res){
-        try {
-            await order.update({
-                where: {
-                    id: req.params.id,
-                },
-            });
-            res.send("The Orders has been updated succesfully")
-        } catch (error) {
-            console.error(error);
-            res
-            .status(500)
-            .send({ message: "A unknow error have been execute for updating the orders" })
-        }
-    }
-
-
-
-
-
+    })
+    .catch((error => {
+        res.send(error)
+    }))
 }
 
-module.exports = OrderController;
+OrdersController.allOrders = async (req,res) => {
+
+    let consulta = `SELECT user.name AS nombre, film.title AS titulo , films.popularity AS top_rated, user.nickname AS Nick, user.email AS email
+    FROM usuarios INNER JOIN orders 
+    ON user.id = orders.userId INNER JOIN film 
+    ON film.id = orders.filmId WHERE popularity > 6 AND name LIKE '%Ra%' ORDER BY top_rated DESC`; 
+
+    let resultado = await Order.sequelize.query(consulta,{
+        type: Order.sequelize.QueryTypes.SELECT});
+
+    if(result){
+        res.send(result);
+    }
+
+}
+module.exports = OrdersController;
