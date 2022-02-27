@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "remote",
-    "password": "1234",
-    "database": "ProjectFour",
-    "host": "192.168.0.167",
+    "username": "root",
+    "password": "flowto2000",
+    "database": "Project_four",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "remote",
-    "password": "1234",
-    "database": "ProjectFour",
-    "host": "192.168.0.167",
+    "username": "root",
+    "password": "flowto2000",
+    "database": "Project_four",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "remote",
-    "password": "1234",
-    "database": "ProjectFour",
-    "host": "192.168.0.167",
+    "username": "root",
+    "password": "flowto2000",
+    "database": "Project_four",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }

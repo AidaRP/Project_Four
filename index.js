@@ -7,7 +7,7 @@ const db = require('./db.js');
 
 
 const app = express();
-const PORT = 2000;
+const PORT = 3001;
 
 
 //CONFIGURATION CORS OPTIONS
@@ -28,7 +28,6 @@ app.get('/',(req, res) => {res.send('Welcome to the DevHell');});
 app.use(router);
 
 db.then(()=>{
-    app.listen(PORT, ()=> 
-    console.log(`Flow to ${PORT}, yo vestida flow to ${PORT}`)); //Message for know that server are in functioning.
+    app.listen(PORT, ()=> console.log(`Server Online in port: ${PORT}`)); //Message for know that server are in functioning.
 })
 .catch((err)=> console.log(err.message));   
