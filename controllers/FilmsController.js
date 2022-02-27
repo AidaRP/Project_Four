@@ -7,7 +7,7 @@ const { compareSync } = require("bcrypt");
 
 
 
-//Controller Film Funtions
+//Films Controller Functions
 
 const FilmsController = {};
 

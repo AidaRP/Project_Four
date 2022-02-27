@@ -4,6 +4,8 @@ const { Order } = require('../models/index');
 
 const OrdersController = {};
 
+//Orders Controller functions
+
 OrdersController.placeNewOrder = (req,res) => {
     
     let body = req.body;

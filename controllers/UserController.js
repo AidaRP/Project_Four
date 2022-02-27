@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const UserController = {};
 
 
-//Funciones del controlador
+//User Controller functions
 
 UserController.getUsers = (req, res) => {
     //Búsqueda trayendo a todos los Users
@@ -233,8 +233,7 @@ UserController.deleteById = async (req, res) => {
 };
 
 
-UserController.logUser
- = (req, res) => {
+UserController.logUser= (req, res) => {
 
     let correo = req.body.email;
     let password = req.body.password;

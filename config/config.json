@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "root",
+    "username": "remote",
     "password": "1234",
     "database": "ProjectFour",
-    "host": "127.0.0.1",
+    "host": "192.168.0.167",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
+    "username": "remote",
     "password": "1234",
     "database": "ProjectFour",
-    "host": "127.0.0.1",
+    "host": "192.168.0.167",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
+    "username": "remote",
     "password": "1234",
     "database": "ProjectFour",
-    "host": "127.0.0.1",
+    "host": "192.168.0.167",
     "dialect": "mysql"
   }
 }
