@@ -9,7 +9,7 @@ const FilmsController = require('../controllers/FilmsController');
 
 //Read all films
 router.get('/',FilmsController.getFilms);
-//http://localhost:3000/films
+//http://localhost:3001/films
 
 //Register a new film
 router.post('/', FilmsController.filmRegister);

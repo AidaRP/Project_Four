@@ -10,7 +10,7 @@ OrdersController.placeNewOrder = (req,res) => {
     
     let body = req.body;
 
-    console.log("This is fucking body",body)
+    console.log("This is body",body)
 
     Order.create({
         price: body.price,
@@ -32,12 +32,12 @@ OrdersController.placeNewOrder = (req,res) => {
 
 OrdersController.allOrders = async (req,res) => {
 
-    let consulta = `SELECT user.name AS nombre, film.title AS titulo , films.popularity AS top_rated, user.nickname AS Nick, user.email AS email
-    FROM usuarios INNER JOIN orders 
+    let consulta = `SELECT user.name AS nombre, film.title AS titulo , films.news AS top_rated, user.name AS Nick, user.email AS email
+    FROM users INNER JOIN orders 
     ON user.id = orders.userId INNER JOIN film 
-    ON film.id = orders.filmId WHERE popularity > 6 AND name LIKE '%Ra%' ORDER BY top_rated DESC`; 
+    ON film.id = orders.filmId WHERE news > 6 AND name LIKE '%Ra%' ORDER BY news DESC`; 
 
-    let resultado = await Order.sequelize.query(consulta,{
+    let result = await Order.sequelize.query(consulta,{
         type: Order.sequelize.QueryTypes.SELECT});
 
     if(result){
