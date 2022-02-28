@@ -1,5 +1,5 @@
 
-const { Users} = require("../models/index.js");
+const { Users } = require("../models/index.js");
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
@@ -12,8 +12,7 @@ const UsersController = {};
 
 UsersController.getUsers = (req, res) => {
     //Search get All users
-    Users
-    .findAll()
+    Users.findAll()
     .then(data => {
 
         res.send(data)
@@ -23,8 +22,7 @@ UsersController.getUsers = (req, res) => {
 
 UsersController.getUsersId = (req, res) => {
     //Search a one Id
-    Users
-    .findByPk(req.params.id)
+    Users.findByPk(req.params.id)
     .then(data => {
         res.send(data)
     });
@@ -32,8 +30,7 @@ UsersController.getUsersId = (req, res) => {
 
 UsersController.getUsersEmail = (req, res) => {
     //Search comparing a one field work
-    Users
-    .findOne({ where : { email : req.params.email }})
+    Users.findOne({ where : { email : req.params.email }})
     .then(data => {
         res.send(data)
     });
@@ -88,9 +85,8 @@ UsersController.registerUsers = async (req, res) => {
                     email: email,
                     password: password,
                     nickname: nickname
-                }).then(User => {
-                    res.send(`${Users
-                        .name}, Welcome to the jungle`);
+                }).then(Users => {
+                    res.send(`${Users.name}, Welcome to the jungle`);
                 })
                 .catch((error) => {
                     res.send(error);
@@ -116,8 +112,7 @@ UsersController.updateProfile = async (req, res) => {
 
     try {
 
-        User
-        .update(data, {
+        Users.update(data, {
             where: {id : id}
         })
         .then(update => {
@@ -140,13 +135,13 @@ UsersController.updatePassword = (req,res) => {
 
     let newPassword = req.body.newPassword;
 
-    User.findOne({
+    Users.findOne({
         where : { id : id}
-    }).then(UserFound => {
+    }).then(UsersFound => {
 
-        if(UserFound){
+        if(UsersFound){
 
-            if (bcrypt.compareSync(oldPassword, UserFound.password)) {
+            if (bcrypt.compareSync(oldPassword, UsersFound.password)) {
 
                 //If the password is correct
 
@@ -154,7 +149,6 @@ UsersController.updatePassword = (req,res) => {
 
                 newPassword = bcrypt.hashSync(newPassword, Number.parseInt(authConfig.rounds)); 
 
-                ////////////////////////////////7
 
                 //Secondly save new password in database
 
@@ -164,15 +158,14 @@ UsersController.updatePassword = (req,res) => {
 
                 console.log("this is data",data);
                 
-                User
-                .update(data, {
+                Users.update(data, {
                     where: {id : id}
                 })
                 .then(actualizado => {
                     res.send(actualizado);
                 })
                 .catch((error) => {
-                    res.status(401).json({ msg: `Ha ocurrido un error actualizando el password`});
+                    res.status(401).json({ msg: `Update of password has failed`});
                 });
 
             }else{
@@ -181,8 +174,7 @@ UsersController.updatePassword = (req,res) => {
 
 
         }else{
-            res.send(`User
-             not found`);
+            res.send(`User not found`);
         }
 
     }).catch((error => {
@@ -195,13 +187,12 @@ UsersController.deleteAll = async (req, res) => {
 
     try {
 
-        User
-        .destroy({
+        Users.destroy({
             where : {},
             truncate : false
         })
-        .then(UsersEliminated => {
-            res.send(`Have been eliminated ${UsersEliminated} Users`);
+        .then(usersEliminated => {
+            res.send(`Have been eliminated ${usersEliminated} Users`);
         })
 
     } catch (error) {
@@ -216,13 +207,12 @@ UsersController.deleteById = async (req, res) => {
 
     try {
 
-        User
-        .destroy({
+        Users.destroy({
             where : { id : id },
             truncate : false
         })
-        .then(UserEliminated => {
-            console.log(UserEliminated);
+        .then(usersEliminated => {
+            console.log(usersEliminated);
             res.send(`The user with id ${id} has been eliminated`);
         })
 
@@ -235,36 +225,29 @@ UsersController.deleteById = async (req, res) => {
 
 UsersController.logUser= (req, res) => {
 
-    let correo = req.body.email;
+    let email = req.body.email;
     let password = req.body.password;
 
-    User
-    .findOne({
-        where : {email : correo}
-    }).then(User => {
+    Users.findOne({
+        where : {email : email}
+    }).then(Users => {
 
-        if(!User
-            ){
+        if(!Users ){
             res.send("User or password denied");
         }else {
           
             //If the User already existes we go comprobate her password
 
-            if (bcrypt.compareSync(password, User
-                .password)) { //Compare password introduced with password setted for encriptation
+            if (bcrypt.compareSync(password, Users.password)) { //Compare password introduced with password setted for encriptation
 
-                console.log(User.password);
+                console.log(Users.password);
 
-                let token = jwt.sign({ User
-                    : User
-                 }, authConfig.secret, {
+                let token = jwt.sign({ Users : Users}, authConfig.secret, {
                     expiresIn: authConfig.expires
                 });
 
                 res.json({
-                    User
-                    : User
-                    ,
+                    Users : Users,
                     token: token
                 })
             } else {
