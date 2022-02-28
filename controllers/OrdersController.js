@@ -1,28 +1,25 @@
-
 const { Order } = require('../models/index');
 
 
 const OrdersController = {};
 
-//Orders Controller functions
-
 OrdersController.placeNewOrder = (req,res) => {
     
     let body = req.body;
 
-    console.log("This is body",body)
+    console.log("este es body",body)
 
     Order.create({
         price: body.price,
-        peliculaId: body.filmId,
-        usuarioId: body.userId,
-        fecha: body.date
+        peliculaId: body.peliculaId,
+        usuarioId: body.usuarioId,
+        fecha: body.fecha
     })
-    .then(Order => {
-        if(Order){
-            res.send(Order)
+    .then(pedido => {
+        if(pedido){
+            res.send(pedido)
         }else{
-            res.send("The creation of a new order has been failed");
+            res.send("La creación de un nuevo pedido ha fallado");
         }
     })
     .catch((error => {
@@ -32,17 +29,18 @@ OrdersController.placeNewOrder = (req,res) => {
 
 OrdersController.allOrders = async (req,res) => {
 
-    let consulta = `SELECT user.name AS nombre, film.title AS titulo , films.news AS top_rated, user.name AS Nick, user.email AS email
-    FROM users INNER JOIN orders 
-    ON user.id = orders.userId INNER JOIN film 
-    ON film.id = orders.filmId WHERE news > 6 AND name LIKE '%Ra%' ORDER BY news DESC`; 
+    let consulta = `SELECT usuarios.name AS nombre, peliculas.titulo AS titulo , peliculas.popularity AS top_rated, usuarios.nickname AS Nick, usuarios.email AS correo
+    FROM usuarios INNER JOIN orders 
+    ON usuarios.id = orders.usuarioId INNER JOIN peliculas 
+    ON peliculas.id = orders.peliculaId WHERE popularity > 6 AND name LIKE '%Ra%' ORDER BY top_rated DESC`; 
 
-    let result = await Order.sequelize.query(consulta,{
+    let resultado = await Order.sequelize.query(consulta,{
         type: Order.sequelize.QueryTypes.SELECT});
 
-    if(result){
-        res.send(result);
+    if(resultado){
+        res.send(resultado);
     }
 
 }
+
 module.exports = OrdersController;

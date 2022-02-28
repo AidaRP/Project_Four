@@ -92,4 +92,3 @@ down: async (queryInterface, Sequelize) => {
    
 }
 };
-  

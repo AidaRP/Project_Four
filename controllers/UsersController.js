@@ -1,5 +1,4 @@
-
-const { Users } = require("../models/index.js");
+const { Users } = require('../models/index');
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
@@ -8,10 +7,10 @@ const jwt = require('jsonwebtoken');
 const UsersController = {};
 
 
-//Users Controller functions
+//Funciones del controlador
 
 UsersController.getUsers = (req, res) => {
-    //Search get All users
+    //Búsqueda trayendo a todos los Users
     Users.findAll()
     .then(data => {
 
@@ -21,7 +20,7 @@ UsersController.getUsers = (req, res) => {
 };
 
 UsersController.getUsersId = (req, res) => {
-    //Search a one Id
+    //Búsqueda buscando una Id
     Users.findByPk(req.params.id)
     .then(data => {
         res.send(data)
@@ -29,7 +28,7 @@ UsersController.getUsersId = (req, res) => {
 };
 
 UsersController.getUsersEmail = (req, res) => {
-    //Search comparing a one field work
+    //Búsqueda comparando un campo
     Users.findOne({ where : { email : req.params.email }})
     .then(data => {
         res.send(data)
@@ -38,8 +37,7 @@ UsersController.getUsersEmail = (req, res) => {
 
 UsersController.registerUsers = async (req, res) => {
     
-    //Register a User
-
+    //Registrando un Users
     
         let name = req.body.name;
         let age = req.body.age;
@@ -49,12 +47,10 @@ UsersController.registerUsers = async (req, res) => {
         console.log("before encriptation",req.body.password);
         let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds)); 
         
-        console.log("this is the password", password);
-
-        //Error verification...
+        console.log("This is your pass", password);
+        //Comprobación de errores.....
         
         //Guardamos en sequelize el Users
-
 
         Users.findAll({
             where : {
@@ -74,9 +70,9 @@ UsersController.registerUsers = async (req, res) => {
 
             }
 
-        }).then(repeatData => {
+        }).then(datosRepetidos => {
 
-            if(repeatData == 0){
+            if(datosRepetidos == 0){
 
                     Users.create({
                     name: name,
@@ -93,8 +89,7 @@ UsersController.registerUsers = async (req, res) => {
                 });
 
             }else {
-                res.send("This Users with this email already exist in the Data Base");
-                
+                res.send("The user with this email already exists");
             }
         }).catch(error => {
             res.send(error)
@@ -106,17 +101,17 @@ UsersController.registerUsers = async (req, res) => {
 
 UsersController.updateProfile = async (req, res) => {
 
-    let data = req.body;
+    let datos = req.body;
 
     let id = req.params.id;
 
     try {
 
-        Users.update(data, {
+        Users.update(datos, {
             where: {id : id}
         })
-        .then(update => {
-            res.send(update);
+        .then(actualizado => {
+            res.send(actualizado);
         });
 
     } catch (error) {
@@ -127,7 +122,7 @@ UsersController.updateProfile = async (req, res) => {
 
 UsersController.updatePassword = (req,res) => {
 
-    console.log("Welcome");
+    console.log("volando voy");
 
     let id = req.body.id;
 
@@ -143,20 +138,21 @@ UsersController.updatePassword = (req,res) => {
 
             if (bcrypt.compareSync(oldPassword, UsersFound.password)) {
 
-                //If the password is correct
+                //En caso de que el Password antiguo SI sea el correcto....
 
-                //First..encriptation of new password...
+                //1er paso..encriptamos el nuevo password....
 
                 newPassword = bcrypt.hashSync(newPassword, Number.parseInt(authConfig.rounds)); 
 
+                ////////////////////////////////7
 
-                //Secondly save new password in database
+                //2do paso guardamos el nuevo password en la base de datos
 
                 let data = {
                     password: newPassword
                 }
 
-                console.log("this is data",data);
+                console.log("esto es data",data);
                 
                 Users.update(data, {
                     where: {id : id}
@@ -165,16 +161,16 @@ UsersController.updatePassword = (req,res) => {
                     res.send(actualizado);
                 })
                 .catch((error) => {
-                    res.status(401).json({ msg: `Update of password has failed`});
+                    res.status(401).json({ msg: `Has been a error while updating the token`});
                 });
 
             }else{
-                res.status(401).json({ msg: "User or password denied" });
+                res.status(401).json({ msg: "Users or invalid password" });
             }
 
 
         }else{
-            res.send(`User not found`);
+            res.send(`Users not found`);
         }
 
     }).catch((error => {
@@ -191,8 +187,8 @@ UsersController.deleteAll = async (req, res) => {
             where : {},
             truncate : false
         })
-        .then(usersEliminated => {
-            res.send(`Have been eliminated ${usersEliminated} Users`);
+        .then(UsersDelete => {
+            res.send(`Has been deleted ${UsersDelete} Users`);
         })
 
     } catch (error) {
@@ -211,9 +207,9 @@ UsersController.deleteById = async (req, res) => {
             where : { id : id },
             truncate : false
         })
-        .then(usersEliminated => {
-            console.log(usersEliminated);
-            res.send(`The user with id ${id} has been eliminated`);
+        .then(UsersDelete => {
+            console.log(UsersDelete);
+            res.send(`The users with id ${id} has been deleted`);
         })
 
     } catch (error) {
@@ -223,35 +219,35 @@ UsersController.deleteById = async (req, res) => {
 };
 
 
-UsersController.logUser= (req, res) => {
+UsersController.logUsers = (req, res) => {
 
-    let email = req.body.email;
+    let correo = req.body.email;
     let password = req.body.password;
 
     Users.findOne({
-        where : {email : email}
+        where : {email : correo}
     }).then(Users => {
 
-        if(!Users ){
-            res.send("User or password denied");
+        if(!Users){
+            res.send("Users or invalid password");
         }else {
-          
-            //If the User already existes we go comprobate her password
+            //el Users existe, por lo tanto, vamos a comprobar
+            //si el password es correcto
 
-            if (bcrypt.compareSync(password, Users.password)) { //Compare password introduced with password setted for encriptation
+            if (bcrypt.compareSync(password, Users.password)) { //COMPARA CONTRASEÑA INTRODUCIDA CON CONTRASEÑA GUARDADA, TRAS DESENCRIPTAR
 
                 console.log(Users.password);
 
-                let token = jwt.sign({ Users : Users}, authConfig.secret, {
+                let token = jwt.sign({ Users: Users }, authConfig.secret, {
                     expiresIn: authConfig.expires
                 });
 
                 res.json({
-                    Users : Users,
+                    Users: Users,
                     token: token
                 })
             } else {
-                res.status(401).json({ msg: "User or password denied" });
+                res.status(401).json({ msg: "Users or invalid password" });
             }
         };
 

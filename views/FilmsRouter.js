@@ -5,26 +5,27 @@ const router = express.Router();
 const FilmsController = require('../controllers/FilmsController');
 
 
-//DECLARE CRUD RESTFULL
+//CRUD RESTful
 
-//Read all films
-router.get('/',FilmsController.getFilms);
-//http://localhost:3001/films
+//Leer todas las peliculas
+router.post('/', FilmsController.newFilms);
+//http://localhost:3000/films
 
-//Register a new film
-router.post('/', FilmsController.filmRegister);
+//Registro de una peli nueva
+// router.post('/', FilmsController.registerFilms);
+// //http://localhost:3000/peliculas
 
+// //Búsqueda de películas por título
+// router.get('/title', FilmsController.titleFilms);
 
-//Search films for favorite category
-router.get('/favorite', FilmsController.favouriteFilms);
+// //Búsqueda de películas por  favourite
+// router.get('/favourites', FilmsController.favouriteFilms);
 
-//Search new films for  adult category
-router.get('/adults', FilmsController.adultFilms);
+// //Búsqueda de novedades
+// router.get('/news', FilmsController.getNews);
 
-//Search films for her title
-router.get('/title', FilmsController.titleFilms);
+// //Búsqueda de películas por  adulto
+// router.get('/adult', FilmsController.adultFilms);
 
-//Search a News Films
-router.get('/news', FilmsController.getNews);
 
 module.exports = router;

@@ -1,18 +1,18 @@
-const { Usuario } = require('../models/index');
+const { User } = require('../models/index');
 
 
 module.exports = (req, res, next) => {
 
     let id = req.body.id;
 
-    Usuario.findOne({
+    User.findOne({
         where : { id : id }
-    }).then(usuarioEncontrado => {
+    }).then(userFound => {
 
-        if(usuarioEncontrado.rol == 1){
+        if(userFound.rol == 1){
             next();
         }else {
-            res.send(`El usuario no es admin`)
+            res.send(`¡The user isn't a admin!`)
         }
     }).catch(error => {
         res.send(error)
