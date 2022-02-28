@@ -1,18 +1,18 @@
 
-const { User} = require("../models/index.js");
+const { Users} = require("../models/index.js");
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
 
-const UserController = {};
+const UsersController = {};
 
 
-//User Controller functions
+//Users Controller functions
 
-UserController.getUsers = (req, res) => {
-    //Búsqueda trayendo a todos los Users
-    User
+UsersController.getUsers = (req, res) => {
+    //Search get All users
+    Users
     .findAll()
     .then(data => {
 
@@ -21,27 +21,27 @@ UserController.getUsers = (req, res) => {
 
 };
 
-UserController.getUsersId = (req, res) => {
-    //Búsqueda buscando una Id
-    User
+UsersController.getUsersId = (req, res) => {
+    //Search a one Id
+    Users
     .findByPk(req.params.id)
     .then(data => {
         res.send(data)
     });
 };
 
-UserController.getUsersEmail = (req, res) => {
-    //Búsqueda comparando un campo
-    User
+UsersController.getUsersEmail = (req, res) => {
+    //Search comparing a one field work
+    Users
     .findOne({ where : { email : req.params.email }})
     .then(data => {
         res.send(data)
     });
 }
 
-UserController.registerUser = async (req, res) => {
+UsersController.registerUsers = async (req, res) => {
     
-    //Registrando un User
+    //Register a User
 
     
         let name = req.body.name;
@@ -54,12 +54,12 @@ UserController.registerUser = async (req, res) => {
         
         console.log("this is the password", password);
 
-        //Comprobación de errores.....
+        //Error verification...
         
-        //Guardamos en sequelize el User
+        //Guardamos en sequelize el Users
 
 
-        User.findAll({
+        Users.findAll({
             where : {
 
                 [Op.or] : [
@@ -81,7 +81,7 @@ UserController.registerUser = async (req, res) => {
 
             if(repeatData == 0){
 
-                    User.create({
+                    Users.create({
                     name: name,
                     age: age,
                     surname: surname,
@@ -89,7 +89,7 @@ UserController.registerUser = async (req, res) => {
                     password: password,
                     nickname: nickname
                 }).then(User => {
-                    res.send(`${User
+                    res.send(`${Users
                         .name}, Welcome to the jungle`);
                 })
                 .catch((error) => {
@@ -97,7 +97,7 @@ UserController.registerUser = async (req, res) => {
                 });
 
             }else {
-                res.send("This User with this email already exist in the Data Base");
+                res.send("This Users with this email already exist in the Data Base");
                 
             }
         }).catch(error => {
@@ -108,7 +108,7 @@ UserController.registerUser = async (req, res) => {
     
 };
 
-UserController.updateProfile = async (req, res) => {
+UsersController.updateProfile = async (req, res) => {
 
     let data = req.body;
 
@@ -130,7 +130,7 @@ UserController.updateProfile = async (req, res) => {
 
 };
 
-UserController.updatePassword = (req,res) => {
+UsersController.updatePassword = (req,res) => {
 
     console.log("Welcome");
 
@@ -148,15 +148,15 @@ UserController.updatePassword = (req,res) => {
 
             if (bcrypt.compareSync(oldPassword, UserFound.password)) {
 
-                //En caso de que el Password antiguo SI sea el correcto....
+                //If the password is correct
 
-                //1er paso..encriptamos el nuevo password....
+                //First..encriptation of new password...
 
                 newPassword = bcrypt.hashSync(newPassword, Number.parseInt(authConfig.rounds)); 
 
                 ////////////////////////////////7
 
-                //2do paso guardamos el nuevo password en la base de datos
+                //Secondly save new password in database
 
                 let data = {
                     password: newPassword
@@ -191,7 +191,7 @@ UserController.updatePassword = (req,res) => {
 
 };
 
-UserController.deleteAll = async (req, res) => {
+UsersController.deleteAll = async (req, res) => {
 
     try {
 
@@ -210,7 +210,7 @@ UserController.deleteAll = async (req, res) => {
 
 };
 
-UserController.deleteById = async (req, res) => {
+UsersController.deleteById = async (req, res) => {
 
     let id = req.params.id;
 
@@ -233,7 +233,7 @@ UserController.deleteById = async (req, res) => {
 };
 
 
-UserController.logUser= (req, res) => {
+UsersController.logUser= (req, res) => {
 
     let correo = req.body.email;
     let password = req.body.password;
@@ -278,4 +278,4 @@ UserController.logUser= (req, res) => {
     })
 };
 
-module.exports = UserController;
+module.exports = UsersController;
