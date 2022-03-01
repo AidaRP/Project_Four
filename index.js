@@ -1,13 +1,12 @@
-const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
-const morgan = require('morgan');
 const router = require('./router.js');
 const db = require('./db.js');
 
 
+
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 
 //CONFIGURATION CORS OPTIONS
