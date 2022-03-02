@@ -9,7 +9,7 @@ const UsuariosController = require('../controllers/UsuariosController');
 
 //Leer todos los usuarios
 router.get('/', auth, UsuariosController.getUsers);
-//http://localhost:5000/usuarios
+
 
 
 // router.get('/email/:email', auth, UsuariosController.getUsersEmail);
@@ -17,7 +17,7 @@ router.get('/:id', auth, UsuariosController.getUsersId);
 
 //Registro
 router.post('/', UsuariosController.registerUsers);
-//http://localhost:3000/usuarios
+
 
 //Modificar datos de un Usuario
 router.put('/newpassword', auth, UsuariosController.updatePassword);
@@ -32,7 +32,7 @@ router.delete('/:id', auth, UsuariosController.deleteById);
 
 //Login
 router.post('/login', UsuariosController.logUsers);
-//https://localhost:3000/usuarios/login
+
 
 
 module.exports = router;

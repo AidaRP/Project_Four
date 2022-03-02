@@ -4,7 +4,7 @@ const { Usuario } = require('../models/index');
 module.exports = (req, res, next) => {
 
     let id = req.body.id;
-console.log('FUnciona Jodeeeer', id)
+console.log(id)
     Usuario.findOne({
 
         where : { id : id }

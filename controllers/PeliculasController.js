@@ -36,7 +36,7 @@ PeliculasController.peliculasId = (req, res) => {
     })
     .catch(err => {
         res.send(err)
-        console.log('soy una mierda x eso fallo', err)
+        console.log(err)
     });
     
 }
