@@ -6,7 +6,7 @@ const db = require('./db.js');
 
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 
 //CONFIGURATION CORS OPTIONS
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cors(corsOptions)); //Add CORS Middleware.
 
 //Routes
-app.get('/',(req, res) => {res.send('Welcome to the DevHell');});
+
 app.use(router);
 
 db.then(()=>{

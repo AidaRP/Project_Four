@@ -1,17 +1,17 @@
-const { Users } = require('../models/index');
+const { Usuario } = require('../models/index');
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt');
 const authConfig = require('../config/auth');
 const jwt = require('jsonwebtoken');
 
-const UsersController = {};
+const UsuariosController = {};
 
 
-//Funciones del controlador
+// Funciones del controlador
 
-UsersController.getUsers = (req, res) => {
+UsuariosController.getUsers = (req, res) => {
     //Búsqueda trayendo a todos los Users
-    Users.findAll()
+    Usuario.findAll()
     .then(data => {
 
         res.send(data)
@@ -19,87 +19,81 @@ UsersController.getUsers = (req, res) => {
 
 };
 
-UsersController.getUsersId = (req, res) => {
+UsuariosController.getUsersId = (req, res) => {
     //Búsqueda buscando una Id
-    Users.findByPk(req.params.id)
+    User.findByPk(req.params.id)
     .then(data => {
         res.send(data)
     });
 };
 
-UsersController.getUsersEmail = (req, res) => {
-    //Búsqueda comparando un campo
-    Users.findOne({ where : { email : req.params.email }})
-    .then(data => {
-        res.send(data)
-    });
-}
+// UsuariosController.getUsersEmail = (req, res) => {
+//     //Búsqueda comparando un campo
+//     User.findOne({ where : { email : req.params.email }})
+//     .then(data => {
+//         res.send(data)
+//     });
+// }
 
-UsersController.registerUsers = async (req, res) => {
+UsuariosController.registerUsers = async (req, res) => {
     
-    //Registrando un Users
+    //Registrando un usuario
     
-        let name = req.body.name;
-        let age = req.body.age;
-        let surname = req.body.surname;
-        let nickname = req.body.nickname;
-        let email = req.body.email;
-        console.log("before encriptation",req.body.password);
-        let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds)); 
-        
-        console.log("This is your pass", password);
-        //Comprobación de errores.....
-        
-        //Guardamos en sequelize el Users
+    let name = req.body.name;
+    let age = req.body.age;
+    let surname = req.body.surname;
+    let nickname = req.body.nickname;
+    let email = req.body.email;
+    console.log("antes de encriptar",req.body.password);
+    let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds)); 
+    
+    console.log("este es el password", password);
+    //Comprobación de errores.....
+    
+    //Guardamos en sequelize el usuario
 
-        Users.findAll({
-            where : {
+    Usuario.findAll({
+        where : {
 
-                [Op.or] : [
-                    {
-                        email : {
-                            [Op.like] : email
-                        }
-                    },
-                    {
-                        nickname : {
-                            [Op.like] : nickname
-                        }
+            [Op.or] : [
+                {
+                    email : {
+                        [Op.like] : email
                     }
-                ]
+                }
+            ]
 
-            }
+        }
 
-        }).then(datosRepetidos => {
+    }).then(datosRepetidos => {
 
-            if(datosRepetidos == 0){
+        if(datosRepetidos == 0){
 
-                    Users.create({
-                    name: name,
-                    age: age,
-                    surname: surname,
-                    email: email,
-                    password: password,
-                    nickname: nickname
-                }).then(Users => {
-                    res.send(`${Users.name}, Welcome to the jungle`);
-                })
-                .catch((error) => {
-                    res.send(error);
-                });
+                Usuario.create({
+                name: name,
+                age: age,
+                surname: surname,
+                email: email,
+                password: password,
+                nickname: nickname
+            }).then(usuario => {
+                res.send(`${usuario.name}, Welcome to the jungle!🦄🍀`);
+            })
+            .catch((error) => {
+                res.send(error);
+            });
 
-            }else {
-                res.send("The user with this email already exists");
-            }
-        }).catch(error => {
-            res.send(error)
-        });
+        }else {
+            res.send("El usuario con ese e-mail ya existe en nuestra base de datos");
+        }
+    }).catch(error => {
+        res.send(error)
+    });
 
-    
     
 };
 
-UsersController.updateProfile = async (req, res) => {
+UsuariosController.updateProfile = async (req, res) => {
 
     let datos = req.body;
 
@@ -107,7 +101,7 @@ UsersController.updateProfile = async (req, res) => {
 
     try {
 
-        Users.update(datos, {
+        User.update(datos, {
             where: {id : id}
         })
         .then(actualizado => {
@@ -120,7 +114,7 @@ UsersController.updateProfile = async (req, res) => {
 
 };
 
-UsersController.updatePassword = (req,res) => {
+UsuariosController.updatePassword = (req,res) => {
 
     console.log("volando voy");
 
@@ -130,7 +124,7 @@ UsersController.updatePassword = (req,res) => {
 
     let newPassword = req.body.newPassword;
 
-    Users.findOne({
+    usuario.findOne({
         where : { id : id}
     }).then(UsersFound => {
 
@@ -154,7 +148,7 @@ UsersController.updatePassword = (req,res) => {
 
                 console.log("esto es data",data);
                 
-                Users.update(data, {
+                User.update(data, {
                     where: {id : id}
                 })
                 .then(actualizado => {
@@ -179,11 +173,11 @@ UsersController.updatePassword = (req,res) => {
 
 };
 
-UsersController.deleteAll = async (req, res) => {
+UsuariosController.deleteAll = async (req, res) => {
 
     try {
 
-        Users.destroy({
+        User.destroy({
             where : {},
             truncate : false
         })
@@ -197,13 +191,13 @@ UsersController.deleteAll = async (req, res) => {
 
 };
 
-UsersController.deleteById = async (req, res) => {
+UsuariosController.deleteById = async (req, res) => {
 
     let id = req.params.id;
 
     try {
 
-        Users.destroy({
+        Usuario.destroy({
             where : { id : id },
             truncate : false
         })
@@ -219,31 +213,31 @@ UsersController.deleteById = async (req, res) => {
 };
 
 
-UsersController.logUsers = (req, res) => {
+UsuariosController.logUsers = (req, res) => {
 
-    let correo = req.body.email;
+    let email = req.body.email;
     let password = req.body.password;
 
-    Users.findOne({
-        where : {email : correo}
-    }).then(Users => {
+    Usuario.findOne({
+        where : {email : email}
+    }).then(Usuario => {
 
-        if(!Users){
+        if(!Usuario){
             res.send("Users or invalid password");
         }else {
             //el Users existe, por lo tanto, vamos a comprobar
             //si el password es correcto
 
-            if (bcrypt.compareSync(password, Users.password)) { //COMPARA CONTRASEÑA INTRODUCIDA CON CONTRASEÑA GUARDADA, TRAS DESENCRIPTAR
+            if (bcrypt.compareSync(password, Usuario.password)) { //COMPARA CONTRASEÑA INTRODUCIDA CON CONTRASEÑA GUARDADA, TRAS DESENCRIPTAR
 
-                console.log(Users.password);
+                console.log(Usuario.password);
 
-                let token = jwt.sign({ Users: Users }, authConfig.secret, {
+                let token = jwt.sign({ usuario: Usuario }, authConfig.secret, {
                     expiresIn: authConfig.expires
                 });
 
                 res.json({
-                    Users: Users,
+                    usuario: Usuario,
                     token: token
                 })
             } else {
@@ -257,4 +251,4 @@ UsersController.logUsers = (req, res) => {
     })
 };
 
-module.exports = UsersController;
+module.exports = UsuariosController;

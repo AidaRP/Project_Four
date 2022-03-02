@@ -2,12 +2,12 @@ const router = require('express').Router();
 
 // const auth = require('./middlewares/auth');
 
-const FilmsRouter = require('./views/FilmsRouter');
+const PeliculasRouter = require('./views/PeliculasRouter');
 const OrdersRouter = require('./views/OrdersRouter');
-const UsersRouter = require('./views/UsersRouter');
+const UsuariosRouter = require('./views/UsuariosRouter');
 
-router.use('/films', FilmsRouter); 
+router.use('/peliculas', PeliculasRouter); 
 router.use('/orders', OrdersRouter); 
-router.use('/users', UsersRouter); 
+router.use('/usuarios', UsuariosRouter); 
 
 module.exports = router;

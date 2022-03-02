@@ -9,15 +9,15 @@
   },
   "test": {
     "username": "root",
-    "password": "flowto2000",
-    "database": "Project_four",
+    "password": "null",
+    "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "flowto2000",
-    "database": "Project_four",
+    "password": "null",
+    "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

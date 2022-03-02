@@ -1,30 +1,39 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Films', {
+    await queryInterface.createTable('Usuarios', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
+      name: {
+        type: Sequelize.STRING,
+        //Este valor puede ser nulo
+        allowNull: false
       },
-      year: {
+      age: {
         type: Sequelize.INTEGER
       },
-      actors: {
+      surname: {
         type: Sequelize.STRING
       },
-      gender: {
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      password: {
         type: Sequelize.STRING
       },
-      city: {
+      nickname: {
         type: Sequelize.STRING
       },
-      rent_out: {
-        type: Sequelize.BOOLEAN
+      rol: {
+        type: Sequelize.BOOLEAN,
+        //este método se usa para dar un valor por defecto
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Films');
+    await queryInterface.dropTable('Usuarios');
   }
 };
