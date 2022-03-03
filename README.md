@@ -48,27 +48,25 @@ También crearemos la carpeta de middlewares para almacenar dentro el codigo par
 # ![EndPoints](/img_ReadMe/EndPoints_SS.jpg) UTILIZADOS:
 
 
-### Funciones Films  --> 
+### Funciones Peliculas  --> 
 
--. getFilms == Nos trae todas las peliculas.
+-. getAllFilms == Nos trae todas las peliculas.
 
--. filmRegister == Registra 1 pelicula. 
+-. registerFilms == Registra 1 pelicula. 
 
--. titleFilms  == Trae pelicula por título.  
+-. findFilmsTitle  == Trae pelicula por título.  
 
 -. getNews == Trae las peliculas más nuevas.    
 
--. favouriteFilms == Trae las peliculas favoritas.
+-. peliculasId == Trae las peliculas x Id.
 
--. adultFilm == Trae las peliculas para +18.
+-. deleteFilmsById == Elimina las peliculas x Id.
 
 ### Funciones User   --> 
 
 .- getUsers == Trae usuarios.
 
 .- getUsersId == Trae a los usuarios por su ID.
-
-.- getUsersEmail == Trae a los usuarios por su email.
 
 .- registerUsers == Registra un usuario.
 
@@ -90,4 +88,8 @@ También crearemos la carpeta de middlewares para almacenar dentro el codigo par
 
 creamos el archivo db.js para que podamos establecer la conexión con la BBDD. 
 
-[FOTO DEL DIAGRAMA DE BBDD]
+
+![DiagramaBBDD](/img_ReadMe/BBDD_PR4.jpg)
+
+El proyecto posee 3 tablas: películas, orders y usuarios. Los usuarios podrán hacer un order de una sola película. Los usuarios podrán tener varios orders o ninguno, pero en un order solo podrá aparecer un usuario (1:N). Las películas podrán aparecer en varios orders o en ninguno, pero en un order solo podrá aparece una película (1:N).
+
