@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cors(corsOptions)); //Add CORS Middleware.
 
 //Routes
-
+app.get('/', (req, res) => {res.send('🤩¡Has conseguido deployar!🥳');});
 app.use(router);
 
 db.then(()=>{
