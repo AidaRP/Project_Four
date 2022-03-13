@@ -14,10 +14,10 @@ module.exports = {
       sinopsis: {
         type: Sequelize.STRING
       },
-      adult: {
+      adulto: {
         type: Sequelize.BOOLEAN
       },
-      popularity: {
+      popularidad: {
         type: Sequelize.FLOAT
       },
       image: {

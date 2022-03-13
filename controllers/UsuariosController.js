@@ -40,8 +40,8 @@ UsuariosController.registerUsers = async (req, res) => {
     //Registrando un usuario
     
     let name = req.body.name;
-    let age = req.body.age;
-    let surname = req.body.surname;
+    let edad = req.body.edad;
+    let apellido = req.body.apellido;
     let nickname = req.body.nickname;
     let email = req.body.email;
     console.log("antes de encriptar",req.body.password);
@@ -71,8 +71,8 @@ UsuariosController.registerUsers = async (req, res) => {
 
                 Usuario.create({
                 name: name,
-                age: age,
-                surname: surname,
+                edad: edad,
+                apellido: apellido,
                 email: email,
                 password: password,
                 nickname: nickname

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Order.init({
-    price: DataTypes.INTEGER,
+    precio: DataTypes.INTEGER,
     peliculaId: DataTypes.INTEGER,
     usuarioId: DataTypes.INTEGER,
     fecha: DataTypes.DATE

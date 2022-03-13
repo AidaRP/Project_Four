@@ -13,10 +13,10 @@ module.exports = {
         //Este valor puede ser nulo
         allowNull: false
       },
-      age: {
+      estreno: {
         type: Sequelize.INTEGER
       },
-      surname: {
+      apellido: {
         type: Sequelize.STRING
       },
       email: {
@@ -32,7 +32,6 @@ module.exports = {
       },
       rol: {
         type: Sequelize.BOOLEAN,
-        //este método se usa para dar un valor por defecto
         defaultValue: false,
       },
       createdAt: {

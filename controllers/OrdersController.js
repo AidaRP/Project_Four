@@ -9,7 +9,7 @@ OrdersController.placeNewOrder = (req,res) => {
     console.log("Soy body",body)
 
     Order.create({
-        price: body.price,
+        precio: body.precio,
         peliculaId: body.peliculaId,
         usuarioId: body.usuarioId,
         fecha: body.fecha

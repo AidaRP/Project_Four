@@ -3,12 +3,12 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     
-      await queryInterface.bulkInsert('users',[{
+      await queryInterface.bulkInsert('usuarios',[{
     "id": 5,
     "name": "Leigh",
     "email": "lblaik0@baidu.com",
     "password": "Ul440OPrNms",
-    "city": "Gorki Vtoryye",
+    "ciudad": "Gorki Vtoryye",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -16,7 +16,7 @@ module.exports = {
     "name": "Lewes",
     "email": "lphillipp1@amazon.co.uk",
     "password": "zypMKyYFU",
-    "city": "Shiye",
+    "ciudad": "Shiye",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -24,7 +24,7 @@ module.exports = {
     "name": "Ynes",
     "email": "ychristescu2@irs.gov",
     "password": "gwYSI0gy",
-    "city": "Haz-Zebbug",
+    "ciudad": "Haz-Zebbug",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -32,7 +32,7 @@ module.exports = {
     "name": "Erda",
     "email": "ebuckler3@wikimedia.org",
     "password": "siRgHx",
-    "city": "Orlando",
+    "ciudad": "Orlando",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -40,7 +40,7 @@ module.exports = {
     "name": "Rosemaria",
     "email": "rkernes4@cyberchimps.com",
     "password": "FPhmK8xCx4I",
-    "city": "Pokotylivka",
+    "ciudad": "Pokotylivka",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -48,7 +48,7 @@ module.exports = {
     "name": "Derek",
     "email": "dbradberry5@imageshack.us",
     "password": "iG8ydALzsMf",
-    "city": "Kinsealy-Drinan",
+    "ciudad": "Kinsealy-Drinan",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -56,7 +56,7 @@ module.exports = {
     "name": "Kennan",
     "email": "kparnall6@comcast.net",
     "password": "qbxbYoqkVx",
-    "city": "Crasto",
+    "ciudad": "Crasto",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -64,7 +64,7 @@ module.exports = {
     "name": "Hailee",
     "email": "hginity7@mediafire.com",
     "password": "G7ITNce",
-    "city": "Liuji",
+    "ciudad": "Liuji",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -72,7 +72,7 @@ module.exports = {
     "name": "Arlyn",
     "email": "asings8@instagram.com",
     "password": "U0IvPvgj5",
-    "city": "Bengtsfors",
+    "ciudad": "Bengtsfors",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }, {
@@ -80,7 +80,7 @@ module.exports = {
     "name": "Pacorro",
     "email": "phampstead9@github.com",
     "password": "WfluRFBxk0h",
-    "city": "Alpūrai",
+    "ciudad": "Alpūrai",
     "createdAt":"4.12.2022",
     "updatedAt":"19.02.2022"
   }], {});
@@ -88,7 +88,7 @@ module.exports = {
 
 down: async (queryInterface, Sequelize) => {
   
-    await queryInterface.bulkDelete('users', null, {});
+    await queryInterface.bulkDelete('usuarios', null, {});
    
 }
 };

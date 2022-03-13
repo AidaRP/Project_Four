@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      price: {
+      precio: {
         type: Sequelize.INTEGER
       },
       peliculaId: {

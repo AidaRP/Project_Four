@@ -18,7 +18,7 @@ PeliculasController.getAllFilms = (req, res) => {
 
 PeliculasController.findFilmsTitle = (req, res) => {
     //Búsqueda comparando un campo
-    Pelicula.findOne({ where : { titulo : req.body.titulo }})
+    Pelicula.findAll({ where : { titulo : req.body.titulo }})
     .then(data => {
         res.send(data)
     });
@@ -99,8 +99,8 @@ PeliculasController.newFilms = (req, res) => {
             
             titulo:peli.titulo,
             sinopsis:peli.sinopsis,
-            adult:peli.adult,
-            popularity:peli.popularity,
+            adulto:peli.adulto,
+            popularidad:peli.popularidad,
             image:peli.image,
             fecha:peli.fecha,
         })
