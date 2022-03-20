@@ -26,6 +26,9 @@ router.get('/:titulo', PeliculasController.findFilmsTitle);
 //Get Film by ID
 router.get('/busca/:id',auth, PeliculasController.peliculasId);
 
+//Get Film by ID
+router.get('/copy', PeliculasController.copy);
+
 router.delete('/:id', auth, isAdmin, PeliculasController.deleteFilmsById)
 //Búsqueda de películas por  favourite
 // router.get('/favourites', PeliculasController.favouriteFilms);
