@@ -21,7 +21,7 @@ router.post('/', PeliculasController.registerFilms);
 
 
 //Búsqueda de películas por título
-router.get('/:titulo', PeliculasController.findFilmsTitle);
+router.get('/:title', PeliculasController.findFilmsTitle);
 
 //Get Film by ID
 router.get('/busca/:id',auth, PeliculasController.peliculasId);
