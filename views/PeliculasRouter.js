@@ -21,10 +21,10 @@ router.post('/', PeliculasController.registerFilms);
 
 
 //Búsqueda de películas por título
-router.post('/', PeliculasController.findFilmsTitle);
+router.get('/:titulo', PeliculasController.findFilmsTitle);
 
 //Get Film by ID
-router.get('/:id',auth, PeliculasController.peliculasId);
+router.get('/busca/:id',auth, PeliculasController.peliculasId);
 
 router.delete('/:id', auth, isAdmin, PeliculasController.deleteFilmsById)
 //Búsqueda de películas por  favourite

@@ -13,7 +13,7 @@ module.exports = {
         //Este valor puede ser nulo
         allowNull: false
       },
-      estreno: {
+      edad: {
         type: Sequelize.INTEGER
       },
       apellido: {

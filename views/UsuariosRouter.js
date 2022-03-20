@@ -33,6 +33,8 @@ router.delete('/:id', auth, UsuariosController.deleteById);
 //Login
 router.post('/login', UsuariosController.logUsers);
 
+//Validate Admin
+// router.post('/admin', UsuariosController.validateAdmin);
 
 
 module.exports = router;

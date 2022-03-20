@@ -251,4 +251,20 @@ UsuariosController.logUsers = (req, res) => {
     })
 };
 
+// UsuariosController.validateAdmin = (req, res) => {
+    
+//     let email = req.body.email;
+//     let password = req.body.password;
+//     let rol = req.body.rol
+
+//     if (email && password === true) {
+        
+//         if (rol === 1) {
+//             res.send("🧚🏾🕋Diosa Administradora pase a su interfaz divina🛕👑")
+//         }
+//     } else{
+//         console.log("Upps parece que no has introducido un usuario válido ")
+//     }
+// }
+
 module.exports = UsuariosController;
