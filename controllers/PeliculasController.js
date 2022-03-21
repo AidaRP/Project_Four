@@ -1,10 +1,7 @@
 
 const { Pelicula } = require('../models/index');
 const { Op } = require("sequelize");
-//Random number between two limits function
-const minMaxRoundedRandom = (min, max) => {
-    return Math.round(Math.random() * (max - min) + min);
-}
+const axios = require("axios");
 
 
 
