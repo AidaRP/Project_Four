@@ -1,15 +1,16 @@
 
 const { Pelicula } = require('../models/index');
 const { Op } = require("sequelize");
+//Random number between two limits function
+const minMaxRoundedRandom = (min, max) => {
+    return Math.round(Math.random() * (max - min) + min);
+}
 
 
 
 const PeliculasController = {};
 
-//Random number between two limits function
-const minMaxRoundedRandom = (min, max) => {
-    return Math.round(Math.random() * (max - min) + min);
-}
+
 
 
 //GET
@@ -141,50 +142,33 @@ PeliculasController.deleteFilmsById = (req,res) => {
 
 };
 
+
+
+
+
 //COPY
-// copy = async () => {
-//         let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/original";
-//         let firstScan = await axios.get("https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate")
-//         let numbOfPagesTMDB = firstScan.data.total_pages
-//         let numbOfFilmsTMDB = firstScan.data.total_results
-//         for(let j=1 ; j<=25 ; j++) {
-//             let resultss = await axios.get("https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate");
-//             let numbOfResultsPerPageTMDB = resultss.data.results.length
-//             for(let i=0; i<numbOfResultsPerPageTMDB ; i++) {
-//                 Pelicula.create({
-//                     title : resultss.data.results[i].original_title,
-//                     synopsis : resultss.data.results[i].overview,
-//                     adult : resultss.data.results[i].adult,
-//                     popularity : resultss.data.results[i].popularity,
-//                     image : (TMDBimgUrlRoot + "/" + resultss.data.results[i].poster_path)
-//                 })
-//             }
-//         }
-
-//         return (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
-//     };
-
     PeliculasController.copy = async (req, res) => {
+        console.log('estoy puto dentro', resultss, data);
         // ! Variable para guardar el root para ver el póster
         let TMDBimgUrlRoot = "https://image.tmdb.org/t/p/w185";
         
-        // !Endpoint para traerme una página entera de películas. Necesario para tenerlo una primera vez
+        // ! Endpoint para traerme una página entera de películas. Necesario para tenerlo una primera vez
         let firstScan = await axios.get("https://api.themoviedb.org/3/discover/movie?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate")
         
-        // !bucle para recorrer 25 páginas de resultados. El valor de page lo saco de una función random para que no siempre muestre las mismas páginas.
+        // ! Bucle para recorrer 25 páginas de resultados. El valor de page lo saco de una función random para que no siempre muestre las mismas páginas.
         for(let j=1 ; j<=25 ; j++) {
             let resultss = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=210d6a5dd3f16419ce349c9f1b200d6d&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${minMaxRoundedRandom(1, 25)}&with_watch_monetization_types=flatrate`);
             
-            // !Saco el número de resultados por página para meterselo al siguiente bucle
+            // ! Saco el número de resultados por página para meterselo al siguiente bucle
             let numbOfResultsPerPageTMDB = resultss.data.results.length
             
-            // !Recorro cada elemento de la página para ir guardándolo acorde a los campos de mi BBDD
+            // ! Recorro cada elemento de la página para ir guardándolo acorde a los campos de mi BBDD
             for(let i=0; i<numbOfResultsPerPageTMDB ; i++) {
                 
-                // !Por cada iteración creo un elemento
+                // ! Por cada iteración creo un elemento
                 Pelicula.create({
-                    // !A la izquierda mis campos de mi BBDD
-                    // !A la derecha los campos que devuelve TMDB
+                    // ! A la izquierda mis campos de mi BBDD
+                    // ! A la derecha los campos que devuelve TMDB
                     title : resultss.data.results[i].original_title,
                     synopsis : resultss.data.results[i].overview,
                     adult : resultss.data.results[i].adult,
@@ -194,5 +178,8 @@ PeliculasController.deleteFilmsById = (req,res) => {
             }
         }
         res.send (`${25} pages have been clonated succesfully, with a total amount of ${500} films`)
+        
+console.log('estoy puto fuera', resultss);
     };
+
 module.exports = PeliculasController;
