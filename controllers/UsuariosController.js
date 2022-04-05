@@ -42,7 +42,7 @@ UsuariosController.registerUsers = async (req, res) => {
     let name = req.body.name;
     let edad = req.body.edad;
     let apellido = req.body.apellido;
-    let nickname = req.body.nickname;
+    let nick = req.body.nick;
     let email = req.body.email;
     console.log("antes de encriptar",req.body.password);
     let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds)); 
@@ -75,7 +75,7 @@ UsuariosController.registerUsers = async (req, res) => {
                 apellido: apellido,
                 email: email,
                 password: password,
-                nickname: nickname
+                nick: nick
             }).then(usuario => {
                 res.send(`${usuario.name}, Welcome to the jungle!🦄🍀`);
             })

@@ -27,7 +27,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      nickname: {
+      nick: {
         type: Sequelize.STRING
       },
       rol: {

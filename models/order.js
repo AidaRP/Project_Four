@@ -20,11 +20,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Order.init({
-    precio: DataTypes.INTEGER,
-    peliculaId: DataTypes.INTEGER,
     usuarioId: DataTypes.INTEGER,
-    fecha: DataTypes.DATE
-  }, {
+    peliculaId: DataTypes.INTEGER,
+    alquilada: DataTypes.BOOLEAN,
+    precio: DataTypes.INTEGER,
+    fecha: DataTypes.DATE,
+    fechaDev: DataTypes.DATE}, 
+    {
     sequelize,
     modelName: 'Order',
   });
