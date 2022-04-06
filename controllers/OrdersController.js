@@ -12,7 +12,9 @@ OrdersController.placeNewOrder = (req,res) => {
         precio: body.precio,
         peliculaId: body.peliculaId,
         usuarioId: body.usuarioId,
-        fecha: body.fecha
+        alquilada: body.alquilada,
+        fecha: body.fecha,
+        fechaDev: body.fechaDev
     })
     .then(pedido => {
         if(pedido){

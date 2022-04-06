@@ -5,7 +5,7 @@ module.exports = {
     
       await queryInterface.bulkInsert('usuarios',[{
         name:"Ahri" ,
-        edad: "26",
+        edad: 26,
         apellido: "Fox",
         email:"ahri@ahri.com" ,
         password:"1234567	" ,
@@ -53,7 +53,7 @@ module.exports = {
         rol: false
     }, {
         name: "Ara",
-        edad: "23",
+        edad: 23,
         apellido:"Haan" ,
         email: "ara@ara.com",
         password:"1234567" ,

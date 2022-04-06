@@ -53,7 +53,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
   },{
-      "title": "Dou kyu sei – Classmates",
+      "title": "Dou kyu sei Classmates",
       "synopsis":"Rihito Sajo, an honor student with a perfect score on the entrance exam and Hikaru Kusakabe, in a band and popular among girls, would have never crossed paths. Until one day they started talking at the practice for their school’s upcoming chorus festival. After school, the two meet regularly, as Hikaru helps Rihito to improve his singing skills. While they listen to each other’s voice and harmonize, their hearts start to beat together." ,
       "adult":false ,
       "popularity":13.046,
