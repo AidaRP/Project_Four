@@ -24,7 +24,7 @@ OrdersController.placeNewOrder = (req,res) => {
         }
     })
     .catch((error => {
-        res.send(error)
+        res.status(400).json({error: error})
     }))
 }
 
